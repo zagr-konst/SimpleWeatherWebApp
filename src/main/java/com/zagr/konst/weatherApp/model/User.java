@@ -23,6 +23,7 @@ public class User {
     private String lastName;
 
     @Email
+    @NotEmpty
     private String email;
 
     @NotEmpty

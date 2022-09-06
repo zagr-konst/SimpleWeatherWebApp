@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Registration</title>
@@ -8,7 +8,7 @@
 
 
 <table class="registerTable">
-  <form method="post">
+  <form th:action="@{/users/register}" th:object="${user}" method="post">
   <tbody>
   <tr>
     <td align="center" colspan="3">Please register</td>
@@ -16,31 +16,39 @@
   <tr>
     <td>First name:</td>
     <td colspan="2">
-      <input name="firstName">
+      <input th:field="*{firstName}" name="firstName" id="firstName">
+      <br>
+      <a style="color: red" th:if="${#fields.hasErrors('firstName')}">Invalid name</a>
     </td>
   </tr>
   <tr>
     <td>Last name:</td>
     <td colspan="2">
-      <input name="lastName">
+      <input th:field="*{lastName}" name="lastName" id="lastName">
+      <br>
+      <a style="color: red" th:if="${#fields.hasErrors('lastName')}">Invalid Surname</a>
     </td>
   </tr>
   <tr>
     <td>E-mail:</td>
     <td colspan="2">
-      <input name="email" type="email">
+      <input th:field="*{email}" name="email" id="email" type="email">
+      <br>
+      <a style="color: red" th:if="${#fields.hasErrors('email')}">Invalid email</a>
     </td>
   </tr>
   <tr>
     <td>Password</td>
     <td colspan="2">
-      <input name="password" type="password">
+      <input th:field="*{password}" name="password" id="password" type="password">
+      <br>
+      <a style="color: red" th:if="${#fields.hasErrors('password')}">Invalid password</a>
     </td>
   </tr>
   <tr>
     <td>City:</td>
     <td colspan="2">
-      <input name="city">
+      <input th:field="*{city}" name="city">
     </td>
   </tr>
   <tr>
