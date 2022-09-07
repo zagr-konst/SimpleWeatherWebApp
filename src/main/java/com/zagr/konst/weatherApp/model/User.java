@@ -27,8 +27,8 @@ public class User {
     private String email;
 
     @NotEmpty
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$",
-                message = "password should be stronger")
+            // @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$",
+    //            message = "password should be stronger")
     private String password;
 
     @NotEmpty
