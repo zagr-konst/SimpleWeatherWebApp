@@ -7,8 +7,12 @@
 <body>
 
 
-<table class="registerTable">
-  <form th:action="@{/users/register}" th:object="${user}" method="post">
+<table class="registerTable" border="1px">
+  <form
+          th:action="@{/users/register}"
+          th:object="${user}"
+          method="post">
+
   <tbody>
   <tr>
     <td align="center" colspan="3">Please register</td>
@@ -43,12 +47,6 @@
       <input th:field="*{password}" name="password" id="password" type="password">
       <br>
       <a style="color: red" th:if="${#fields.hasErrors('password')}">Invalid password</a>
-    </td>
-  </tr>
-  <tr>
-    <td>City:</td>
-    <td colspan="2">
-      <input th:field="*{city}" name="city">
     </td>
   </tr>
   <tr>

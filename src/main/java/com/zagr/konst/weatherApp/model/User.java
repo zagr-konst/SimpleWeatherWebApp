@@ -31,7 +31,7 @@ public class User {
     //            message = "password should be stronger")
     private String password;
 
-    @NotEmpty
+   // @NotEmpty
     private String city;
 
 }

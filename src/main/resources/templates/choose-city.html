@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Choose city</title>
+</head>
+<body>
+
+<h1>Please choose your city</h1>
+
+<table>
+
+  <form th:action="@{/users/findCity}"
+          th:object="${cityObj}"
+          method="post">
+
+  <tr>
+    <td>City:</td>
+    <td colspan="3">
+      <input  th:field="*{cityName}" name="cityName" id="cityName">
+      <input type="submit" value="find" th:action="@{/users/findCity}">
+    </td>
+  </tr>
+
+  </form>
+
+
+  <form th:action="@{/users/selectCity}"
+        th:object="${chosenCity}" method="post">
+    <tr>
+      <td></td>
+      <td>
+        <select th:field="*{cityID}">
+
+          <option th:each="city : ${cityList}" th:value="${city.cityID}"
+                  th:text="${city.getCityName()+' '+city.getRegion()+' '+city.getCityID()}">
+          </option>
+        </select>
+      </td>
+    </tr>
+
+
+    <tr>
+      <td></td>
+      <td><input type="submit" value="Choose"></td>
+    </tr>
+
+  </form>
+
+</table>
+</body>
+</html>
