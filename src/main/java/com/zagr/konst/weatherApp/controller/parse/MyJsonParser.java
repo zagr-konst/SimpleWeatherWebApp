@@ -19,7 +19,7 @@ public class MyJsonParser {
 
         HashMap<String,String> weather_value = new HashMap<>();;
 
-        String json = ParseURL.getCityInfo(id);
+        String json = ParseURL.getCityWeatherInfo(id);
         JSONParser parser = new JSONParser();
         //try(FileReader reader = new FileReader("src/style/img/request.json")){
         try {
@@ -103,8 +103,8 @@ public class MyJsonParser {
                 cityList.add(city);
             }
         }catch (Exception e) {
-            System.out.println("MyJsonParser.java: END OF FILE at position 0:");
-            e.printStackTrace();
+                System.out.println("MyJsonParser.java: END OF FILE at position 0:");
+                e.printStackTrace();
         }
 
 
@@ -112,4 +112,34 @@ public class MyJsonParser {
         return cityList;
 
     }
+
+    public static City getCityById(long id) {
+        String json = ParseURL.getCityInfo(id + "");
+
+        City city = new City();
+        city.setCityID(id);
+
+        JSONParser parser = new JSONParser();
+        try {
+            JSONObject jsobj = (JSONObject) parser.parse(json);
+
+            String name = String.valueOf(jsobj.get("EnglishName"));
+            city.setCityName(name);
+
+            JSONObject country_json = (JSONObject) jsobj.get("Country");
+            String country = String.valueOf(country_json.get("EnglishName"));
+            city.setCountry(country);
+
+
+            JSONObject region_json = (JSONObject) jsobj.get("AdministrativeArea");
+            String region = String.valueOf(region_json.get("EnglishName"));
+            city.setRegion(region);
+
+        }catch (Exception e) {
+            System.out.println("MyJsonParser.java: END OF FILE at position 0:");
+            e.printStackTrace();
+        }
+        return city;
+    }
+
 }

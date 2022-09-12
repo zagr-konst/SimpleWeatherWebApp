@@ -3,18 +3,17 @@ package com.zagr.konst.weatherApp.controller.parse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class ParseURL {
     ///////
-    //final static String API_KEY="rmGRBdI6GueRyx9cfoFIAjWJuGldeA1Z";
-    final static String API_KEY="lNXcfnnNPswOqJBzloPRaclYB6Hh1eA4";
+    final static String API_KEY="rmGRBdI6GueRyx9cfoFIAjWJuGldeA1Z";
+    //final static String API_KEY="lNXcfnnNPswOqJBzloPRaclYB6Hh1eA4"; //12.09.22
     //final static String API_KEY="m5ZY7jVSCRRrWMruRfMdTbjikRFdTSxO";
     ///////
 
 
-    static String getCityInfo(String city_id) {
+    static String getCityWeatherInfo(String city_id) {
         //int =323903;
         String result="";
         String url =String.format("http://dataservice.accuweather.com/"
@@ -42,4 +41,21 @@ public class ParseURL {
         //System.out.println("ParseURL:\n"+result);
         return result;
     }
+
+
+    static String getCityInfo(String city_id) {
+        //int =323903;
+        String result = "";
+        String url = String.format("http://dataservice.accuweather.com/locations/v1"
+                + "/%s?apikey=%s", city_id, API_KEY);
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new URL(url).openStream(), "UTF-8"))) {
+            for (String line; (line = reader.readLine()) != null; ) {
+                result += line;
+            }
+        } catch (Exception e) {
+        }
+        System.out.println("ParseURL:\n" + result);
+        return result;
+    }
+
 }

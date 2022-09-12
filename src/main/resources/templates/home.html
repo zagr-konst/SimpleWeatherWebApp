@@ -8,6 +8,59 @@
 <h1>Hello</h1>
 
 <a href="/users/register">Register</a>
-<p th:text="${id}"/>
+
+
+<table th:object="${city}"  align="center" border="1">
+    <thead>
+    <tr align="center">
+        <td colspan="3">
+            <a th:text="${city.cityName+', '+city.country}"/>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3" align=center valign=top>
+            <a th:text="${city.region}"/>
+        </td>
+    </tr>
+    </thead>
+
+    <tbody th:object="${cityWeather}">
+    <tr>
+        <td align="right">
+            Temperature
+        </td>
+        <td align="center">
+            <a th:text="${cityWeather.get('Temperature')}"/>
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td align="right">Feels like:</td>
+        <td align="center">
+            <a th:text="${cityWeather.get('RealFeelTemperature')}"/>
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td align="right">Wind</td>
+        <td align="center">
+            <a th:text="${cityWeather.get('Wind')}"/>
+        </td>
+        <td></td>
+    </tr>
+    <tr align="center">
+        <td colspan="3">
+            <a th:text="${cityWeather.get('WeatherIcon')}"/>
+        </td>
+    </tr>
+    <tr align="center">
+        <td colspan="3">
+            <a th:text="${cityWeather.get('IconPhrase')}"/>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
 </body>
 </html>

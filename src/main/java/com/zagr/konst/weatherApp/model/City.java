@@ -6,7 +6,6 @@ import lombok.*;
 @EqualsAndHashCode @ToString
 public class City {
 
-    private long id;
 
     private String country;
 

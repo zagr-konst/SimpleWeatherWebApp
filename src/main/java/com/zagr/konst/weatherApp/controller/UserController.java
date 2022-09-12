@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
@@ -52,11 +53,15 @@ public class UserController {
     }
 
     @PostMapping("/selectCity")
-    public ModelAndView select(@ModelAttribute("chosenCity") City city, Model model) {
-        System.out.println(city);
+    public ModelAndView select(@ModelAttribute("chosenCity") City city, RedirectAttributes redirectAttributes,
+                               Model model) {
+        System.out.println("chosen "+city);
+
+        city = MyJsonParser.getCityById(city.getCityID());
+
+        redirectAttributes.addFlashAttribute("city", city);
 
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("id",city.getCityID());
         modelAndView.setViewName("redirect:/home");
         return modelAndView;
     }

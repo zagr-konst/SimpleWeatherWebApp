@@ -13,8 +13,13 @@ public class HomeController {
 
     @GetMapping({"/","/home"})
     public String home(Model model){
-     //   model.addAttribute("cityList",MyJsonParser.getCityId("Kharkiv"));
-        model.addAttribute("city",new City());
+
+        City city = (City) model.getAttribute("city");
+        if (city!=null) {
+            model.addAttribute("cityWeather",
+                    MyJsonParser.getCityWeather(city.getCityID()+"")
+                    );
+        }
         return "home";
     }
 

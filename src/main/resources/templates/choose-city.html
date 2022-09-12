@@ -35,6 +35,8 @@
           <option th:each="city : ${cityList}" th:value="${city.cityID}"
                   th:text="${city.getCityName()+' '+city.getRegion()+' '+city.getCityID()}">
           </option>
+
+
         </select>
       </td>
     </tr>
