@@ -7,7 +7,7 @@
 <body>
 <h1>Hello</h1>
 
-<a href="/users/register">Register</a>
+<a href="/users/selectCity">Change city</a>
 
 
 <table th:object="${city}"  align="center" border="1">
@@ -50,7 +50,7 @@
     </tr>
     <tr align="center">
         <td colspan="3">
-            <a th:text="${cityWeather.get('WeatherIcon')}"/>
+            <img th:src="@{'img/'+${image}+'.png'}" width="120" height="120"/>
         </td>
     </tr>
     <tr align="center">

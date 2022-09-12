@@ -7,9 +7,9 @@ import java.net.URL;
 
 public class ParseURL {
     ///////
-    final static String API_KEY="rmGRBdI6GueRyx9cfoFIAjWJuGldeA1Z";
+    //final static String API_KEY="rmGRBdI6GueRyx9cfoFIAjWJuGldeA1Z"; //12.09.22
     //final static String API_KEY="lNXcfnnNPswOqJBzloPRaclYB6Hh1eA4"; //12.09.22
-    //final static String API_KEY="m5ZY7jVSCRRrWMruRfMdTbjikRFdTSxO";
+    final static String API_KEY="m5ZY7jVSCRRrWMruRfMdTbjikRFdTSxO";
     ///////
 
 
