@@ -3,6 +3,7 @@ package com.zagr.konst.weatherApp.controller;
 import com.zagr.konst.weatherApp.controller.parse.MyJsonParser;
 import com.zagr.konst.weatherApp.model.City;
 import com.zagr.konst.weatherApp.model.User;
+import com.zagr.konst.weatherApp.service.CityService;
 import com.zagr.konst.weatherApp.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,9 +22,11 @@ import java.util.List;
 public class UserController {
 
     UserService userService;
+    CityService cityService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService,CityService cityService) {
         this.userService = userService;
+        this.cityService = cityService;
     }
 
     @GetMapping("/register")
@@ -58,6 +61,8 @@ public class UserController {
         System.out.println("chosen "+city);
 
         city = MyJsonParser.getCityById(city.getCityID());
+
+        cityService.create(city);
 
         redirectAttributes.addFlashAttribute("city", city);
 

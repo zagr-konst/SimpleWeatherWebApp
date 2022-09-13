@@ -32,6 +32,8 @@ public class User {
     private String password;
 
    // @NotEmpty
-    private String city;
+    @ManyToOne
+    @JoinColumn(name="cityID",referencedColumnName = "cityID")
+    private City cityID;
 
 }
