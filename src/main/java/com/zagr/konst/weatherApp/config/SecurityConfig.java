@@ -31,11 +31,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/users/register","/users/selectCity","/users/findCity")
+                .antMatchers("/users/register","/users/selectCity","/users/findCity","/login")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().permitAll();
+                .formLogin().loginPage("/login")
+                .defaultSuccessUrl("/home",true)
+                .failureForwardUrl("/login?error");
     }
 
     @Bean
