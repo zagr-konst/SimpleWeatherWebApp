@@ -2,6 +2,10 @@ package com.zagr.konst.weatherApp.controller;
 
 import com.zagr.konst.weatherApp.controller.parse.MyJsonParser;
 import com.zagr.konst.weatherApp.model.City;
+import com.zagr.konst.weatherApp.model.User;
+import com.zagr.konst.weatherApp.security.SecurityUserDetails;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,13 +19,18 @@ public class HomeController {
 
     @GetMapping({"/","/home"})
     public String home(Model model){
-        City city = (City) model.getAttribute("city");
-        if (city!=null) {
-            HashMap<String,String> weatherValue =  MyJsonParser.getCityWeather(city.getCityID()+"");
+        System.out.println("####");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        SecurityUserDetails userDetails = (SecurityUserDetails) authentication.getPrincipal();
 
-            model.addAttribute("image", getIcon(weatherValue.get("WeatherIcon")));
-            model.addAttribute("cityWeather",weatherValue);
-        }
+
+        User user = userDetails.getAuthUser();
+        City city = user.getCityID();
+        HashMap<String,String> weatherValue =  MyJsonParser.getCityWeather(city.getCityID()+"");
+
+        model.addAttribute("city",city);
+        model.addAttribute("image", getIcon(weatherValue.get("WeatherIcon")));
+        model.addAttribute("cityWeather",weatherValue);
         return "home";
     }
 

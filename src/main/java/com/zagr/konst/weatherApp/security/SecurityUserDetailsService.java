@@ -1,4 +1,4 @@
-package com.zagr.konst.weatherApp.service.impl;
+package com.zagr.konst.weatherApp.security;
 
 import com.zagr.konst.weatherApp.model.User;
 import com.zagr.konst.weatherApp.repository.UserRepository;

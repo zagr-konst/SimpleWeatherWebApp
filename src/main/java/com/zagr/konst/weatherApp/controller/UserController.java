@@ -3,8 +3,11 @@ package com.zagr.konst.weatherApp.controller;
 import com.zagr.konst.weatherApp.controller.parse.MyJsonParser;
 import com.zagr.konst.weatherApp.model.City;
 import com.zagr.konst.weatherApp.model.User;
+import com.zagr.konst.weatherApp.security.SecurityUserDetails;
 import com.zagr.konst.weatherApp.service.CityService;
 import com.zagr.konst.weatherApp.service.UserService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -43,32 +46,40 @@ public class UserController {
         userService.create(user);
         model.addAttribute("cityObj", new City());
         model.addAttribute("chosenCity",new City());
-        return "choose-city";
+        return "redirect:/login";
     }
 
     @GetMapping("/selectCity")
-    public ModelAndView select() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("cityObj", new City());
-        modelAndView.addObject("chosenCity", new City());
-        modelAndView.setViewName("choose-city");
-        return modelAndView;
+    public String select(Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        SecurityUserDetails userDetails = (SecurityUserDetails) authentication.getPrincipal();
+        User user = userDetails.getAuthUser();
+
+        if (user.getCityID()!=null) return "redirect:/home";
+
+      //  ModelAndView modelAndView = new ModelAndView();
+        model.addAttribute("cityObj", new City());
+        model.addAttribute("chosenCity", new City());
+//        modelAndView.setViewName("choose-city");
+        return "choose-city";
     }
 
     @PostMapping("/selectCity")
-    public ModelAndView select(@ModelAttribute("chosenCity") City city, RedirectAttributes redirectAttributes,
-                               Model model) {
-        System.out.println("chosen "+city);
+    public String select(@ModelAttribute("chosenCity") City city) {
 
         city = MyJsonParser.getCityById(city.getCityID());
-
         cityService.create(city);
 
-        redirectAttributes.addFlashAttribute("city", city);
 
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/home");
-        return modelAndView;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        SecurityUserDetails userDetails = (SecurityUserDetails) authentication.getPrincipal();
+
+        User user = userDetails.getAuthUser();
+        user.setCityID(city);
+        userService.update(user);
+
+        return "redirect:/home";
     }
 
 

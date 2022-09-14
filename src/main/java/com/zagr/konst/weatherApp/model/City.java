@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Getter @Setter @NoArgsConstructor
-@EqualsAndHashCode @ToString
+@EqualsAndHashCode
 @Entity
 @Table(name = "City")
 public class City {
@@ -23,4 +23,14 @@ public class City {
 
     @OneToMany(mappedBy = "id")
     private List<User> users;
+
+    @Override
+    public String toString() {
+        return "City{" +
+                "country='" + country + '\'' +
+                ", region='" + region + '\'' +
+                ", cityName='" + cityName + '\'' +
+                ", cityID=" + cityID +
+                '}';
+    }
 }
