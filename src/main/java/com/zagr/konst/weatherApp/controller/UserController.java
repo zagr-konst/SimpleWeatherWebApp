@@ -8,6 +8,7 @@ import com.zagr.konst.weatherApp.service.CityService;
 import com.zagr.konst.weatherApp.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,9 +28,13 @@ public class UserController {
     UserService userService;
     CityService cityService;
 
-    public UserController(UserService userService,CityService cityService) {
+    PasswordEncoder passwordEncoder;
+
+    public UserController(UserService userService,
+                          CityService cityService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.cityService = cityService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/register")
@@ -42,7 +47,8 @@ public class UserController {
     public String creteUser(@Valid @ModelAttribute User user, BindingResult bindingResult
                 ,Model model){
         if (bindingResult.hasErrors()) return "register";
-        System.out.println(user);
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.create(user);
         model.addAttribute("cityObj", new City());
         model.addAttribute("chosenCity",new City());
@@ -52,11 +58,6 @@ public class UserController {
     @GetMapping("/selectCity")
     public String select(Model model) {
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        SecurityUserDetails userDetails = (SecurityUserDetails) authentication.getPrincipal();
-        User user = userDetails.getAuthUser();
-
-        if (user.getCityID()!=null) return "redirect:/home";
 
       //  ModelAndView modelAndView = new ModelAndView();
         model.addAttribute("cityObj", new City());
@@ -92,5 +93,17 @@ public class UserController {
         model.addAttribute("chosenCity", new City());
         return "choose-city";
     }
+
+
+    @GetMapping("/validation")
+    public String checkIfUserChoseCity(Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        SecurityUserDetails userDetails = (SecurityUserDetails) authentication.getPrincipal();
+        User user = userDetails.getAuthUser();
+
+        if (user.getCityID()!=null) return "redirect:/home";
+        else return "redirect:/selectCity";
+    }
+
 
 }
