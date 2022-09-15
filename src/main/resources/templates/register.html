@@ -2,12 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
+<!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
     <title>Registration</title>
 </head>
 <body>
 
 
-<table class="registerTable" border="1px">
+<table class="registerTable">
   <form
           th:action="@{/users/register}"
           th:object="${user}"
@@ -58,9 +59,12 @@
       <input  type="reset" value="Clear"/>
     </td>
   </tr>
+  <tr>
+    <td align="right" colspan="3" th:if="${param.error}">
+     <a style="color: red">User with this email already exist, please <a href="/login" style="color: blue">login</a> </a>
+    </td>
   </tbody>
   </form>
 </table>
-
 </body>
 </html>

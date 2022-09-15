@@ -56,7 +56,7 @@ public class MyJsonParser {
             weather_value.put("IconPhrase", iconPhrase);
             weather_value.put("WeatherIcon", weatherIcon);
         }catch(Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         System.out.print("JsonParser:\n"+weather_value);
         return weather_value;
@@ -103,8 +103,8 @@ public class MyJsonParser {
                 cityList.add(city);
             }
         }catch (Exception e) {
-                System.out.println("MyJsonParser.java: END OF FILE at position 0:");
-                e.printStackTrace();
+                //System.out.println("MyJsonParser.java: END OF FILE at position 0:");
+                //e.printStackTrace();
         }
 
 
@@ -136,8 +136,8 @@ public class MyJsonParser {
             city.setRegion(region);
 
         }catch (Exception e) {
-            System.out.println("MyJsonParser.java: END OF FILE at position 0:");
-            e.printStackTrace();
+           // System.out.println("MyJsonParser.java: END OF FILE at position 0:");
+          //  e.printStackTrace();
         }
         return city;
     }

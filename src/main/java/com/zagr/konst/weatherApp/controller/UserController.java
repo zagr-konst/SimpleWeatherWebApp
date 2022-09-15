@@ -49,6 +49,7 @@ public class UserController {
         if (bindingResult.hasErrors()) return "register";
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+
         userService.create(user);
         model.addAttribute("cityObj", new City());
         model.addAttribute("chosenCity",new City());
@@ -102,7 +103,7 @@ public class UserController {
         User user = userDetails.getAuthUser();
 
         if (user.getCityID()!=null) return "redirect:/home";
-        else return "redirect:/selectCity";
+        else return "redirect:/users/selectCity";
     }
 
 
