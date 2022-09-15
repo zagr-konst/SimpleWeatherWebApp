@@ -1,5 +1,8 @@
 package com.zagr.konst.weatherApp.controller.parse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,22 +10,27 @@ import java.net.URL;
 
 public class ParseURL {
     ///////
-    final static String API_KEY="rmGRBdI6GueRyx9cfoFIAjWJuGldeA1Z"; //12.09.22
-    //final static String API_KEY="lNXcfnnNPswOqJBzloPRaclYB6Hh1eA4"; //12.09.22
+    //  final static String API_KEY="rmGRBdI6GueRyx9cfoFIAjWJuGldeA1Z"; //12.09.22
+    final static String API_KEY="lNXcfnnNPswOqJBzloPRaclYB6Hh1eA4"; //12.09.22
     //final static String API_KEY="m5ZY7jVSCRRrWMruRfMdTbjikRFdTSxO"; //14.09.22
     ///////
 
+    static Logger logger = LoggerFactory.getLogger(ParseURL.class);
+
 
     static String getCityWeatherInfo(String city_id) {
-        //int =323903;
         String result="";
-        String url =String.format("http://dataservice.accuweather.com/"
+        String url = String.format("http://dataservice.accuweather.com/"
                 + "forecasts/v1/hourly/1hour/%s?apikey=%s&metric=true&details=true",city_id, API_KEY);
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new URL(url).openStream(), "UTF-8"))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(
+                new URL(url).openStream(), "UTF-8"))) {
+
             for (String line; (line = reader.readLine()) != null;) {
                 result+=line;}
-        }catch(Exception e){}
-        System.out.println("ParseURL:\n"+result);
+            }catch(Exception e){
+                logger.error("Parse URL: server return 503");
+        }
+        logger.info("ParseURL:" + result);
         return result;
     }
 
@@ -36,9 +44,9 @@ public class ParseURL {
             for (String line; (line = reader.readLine()) != null;) {
                 result+=line;}
         }catch(IOException e){
-            System.out.println("Parse URL: server return 503");
+            logger.error("Parse URL: server return 503");
         }
-        //System.out.println("ParseURL:\n"+result);
+        logger.info("ParseURL:" + result);
         return result;
     }
 
@@ -53,8 +61,10 @@ public class ParseURL {
                 result += line;
             }
         } catch (Exception e) {
+            logger.error("Parse URL: server return 503");
         }
-        System.out.println("ParseURL:\n" + result);
+
+        logger.info("ParseURL: " + result);
         return result;
     }
 

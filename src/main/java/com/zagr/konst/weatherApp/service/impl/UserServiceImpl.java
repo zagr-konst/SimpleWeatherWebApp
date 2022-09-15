@@ -1,8 +1,11 @@
 package com.zagr.konst.weatherApp.service.impl;
 
+import com.zagr.konst.weatherApp.controller.parse.MyJsonParser;
 import com.zagr.konst.weatherApp.model.User;
 import com.zagr.konst.weatherApp.repository.UserRepository;
 import com.zagr.konst.weatherApp.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,15 +15,21 @@ public class UserServiceImpl implements UserService {
 
     UserRepository userRepository;
 
+    Logger logger = LoggerFactory.getLogger(MyJsonParser.class);
+
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @Override
     public User create(User user) {
-        if (user!=null)
+        if (user!=null) {
+            logger.info("Saved user: " + user + " into db");
             return userRepository.save(user);
-        else throw new NullPointerException();
+        }else{
+            logger.error("Can't save null user into db");
+            throw new NullPointerException();
+        }
     }
 
     @Override
@@ -37,9 +46,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User update(User user) {
-        if (userRepository.findById(user.getId())!=null)
+        if (userRepository.findById(user.getId())!=null) {
+            logger.info("Successfully updated the user with id:" + user.getId());
             return create(user);
-        else throw new NullPointerException();
+        }else{
+            throw new NullPointerException();
+        }
     }
 
     @Override

@@ -7,12 +7,16 @@ import com.zagr.konst.weatherApp.model.City;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class MyJsonParser {
+
+    static Logger logger = LoggerFactory.getLogger(MyJsonParser.class);
 
 
     public static HashMap<String,String> getCityWeather(String id) {
@@ -21,14 +25,11 @@ public class MyJsonParser {
 
         String json = ParseURL.getCityWeatherInfo(id);
         JSONParser parser = new JSONParser();
-        //try(FileReader reader = new FileReader("src/style/img/request.json")){
         try {
             JSONArray rootJson = (JSONArray) parser.parse(json);
-            //System.out.println(rootJson.get("WeatherIcon"));
             JSONObject jsobj=null;
             for(Object o:rootJson) {
                 jsobj = (JSONObject) o;
-                //System.out.println(jsobj);
             }
             //parse t°
             JSONObject t_json = (JSONObject) jsobj.get("Temperature");
@@ -49,16 +50,15 @@ public class MyJsonParser {
             //parse WeatherIcon
             String weatherIcon = String.valueOf(jsobj.get("WeatherIcon"));
 
-            //System.out.println(t+" "+feelT+" "+wind);
             weather_value.put("Temperature", t);
             weather_value.put("RealFeelTemperature",feelT);
             weather_value.put("Wind", wind);
             weather_value.put("IconPhrase", iconPhrase);
             weather_value.put("WeatherIcon", weatherIcon);
         }catch(Exception e) {
-            //e.printStackTrace();
+            logger.error("Accuweather return null");
         }
-        System.out.print("JsonParser:\n"+weather_value);
+        logger.info("Parsed: "+weather_value);
         return weather_value;
     }
 
@@ -74,7 +74,6 @@ public class MyJsonParser {
         try {
             JSONArray rootJson = (JSONArray) parser.parse(json);
             JSONObject jsobj=null;
-            System.out.println("size "+rootJson.size());
             for(Object o:rootJson) {
                 jsobj = (JSONObject) o;
 
@@ -82,7 +81,7 @@ public class MyJsonParser {
 
                 //parse City name
                 city.setCityName(String.valueOf(jsobj.get("LocalizedName")));
-                //System.out.println(cityName);
+
 
                 //parse Country name
                 JSONObject country_json = (JSONObject) jsobj.get("Country");
@@ -92,19 +91,16 @@ public class MyJsonParser {
                 //parse city id
                 city.setCityID(Integer.valueOf(
                         String.valueOf(jsobj.get("Key"))));
-                //System.out.println(id);
+
 
                 //parse region
                 JSONObject adminArea_json = (JSONObject) jsobj.get("AdministrativeArea");
                 city.setRegion(String.valueOf(adminArea_json.get("LocalizedName")));
 
-                ///return
-
                 cityList.add(city);
             }
         }catch (Exception e) {
-                //System.out.println("MyJsonParser.java: END OF FILE at position 0:");
-                //e.printStackTrace();
+            logger.error("Accuweather return null");
         }
 
 
@@ -136,9 +132,9 @@ public class MyJsonParser {
             city.setRegion(region);
 
         }catch (Exception e) {
-           // System.out.println("MyJsonParser.java: END OF FILE at position 0:");
-          //  e.printStackTrace();
+            logger.error("Accuweather return null");
         }
+        logger.info("Parsed: "+city);
         return city;
     }
 
