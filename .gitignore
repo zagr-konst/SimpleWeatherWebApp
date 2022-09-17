@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+###Api key
+src/main/java/com/zagr/konst/weatherApp/controller/parse/ApiKey.java

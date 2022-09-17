@@ -28,6 +28,7 @@ public class HomeController {
         City city = user.getCityID();
         HashMap<String,String> weatherValue =  MyJsonParser.getCityWeather(city.getCityID()+"");
 
+        model.addAttribute("name",user.getFirstName()+" " + user.getLastName());
         model.addAttribute("city",city);
         model.addAttribute("image", getIcon(weatherValue.get("WeatherIcon")));
         model.addAttribute("cityWeather",weatherValue);

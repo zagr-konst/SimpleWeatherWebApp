@@ -6,9 +6,12 @@
 </head>
 <body>
 
-<a href="/users/selectCity">Change city</a>
-<a style="float:right" href="/logout"><b>Logout</b></a>
-
+<div style="background-color: #e7e4e4; width: 100%" >
+    Hello, <a th:text="${name}"/>
+    <br>
+    <a href="/users/selectCity">Change city</a>
+    <a style="float:right" href="/logout"><b>Logout</b></a>
+</div>
 
 <table th:object="${city}"  align="center" border="1">
     <thead>
@@ -27,7 +30,7 @@
     <tbody th:object="${cityWeather}">
     <tr>
         <td align="right">
-            Temperature
+            Temperature:
         </td>
         <td align="center">
             <a th:text="${cityWeather.get('Temperature')}"/>
@@ -42,7 +45,7 @@
         <td></td>
     </tr>
     <tr>
-        <td align="right">Wind</td>
+        <td align="right">Wind:</td>
         <td align="center">
             <a th:text="${cityWeather.get('Wind')}"/>
         </td>
