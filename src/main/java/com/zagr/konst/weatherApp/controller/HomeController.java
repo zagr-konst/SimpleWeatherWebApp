@@ -25,6 +25,9 @@ public class HomeController {
 
 
         User user = userDetails.getAuthUser();
+
+        if (user.getCityID()==null) return "redirect:/users/selectCity";
+
         City city = user.getCityID();
         HashMap<String,String> weatherValue =  MyJsonParser.getCityWeather(city.getCityID()+"");
 
