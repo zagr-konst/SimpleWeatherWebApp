@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/style/selectCity.css}">
+
     <title>Choose city</title>
 </head>
 <body>
@@ -17,8 +19,8 @@
   <tr>
     <td>City:</td>
     <td colspan="3">
-      <input  th:field="*{cityName}" name="cityName" id="cityName">
-      <input type="submit" value="find" th:action="@{/users/findCity}">
+      <input  th:field="*{cityName}" name="cityName" id="cityName" type="text">
+      <input class="button" type="submit" value="find" th:action="@{/users/findCity}">
     </td>
   </tr>
 
@@ -32,8 +34,8 @@
       <td>
         <select th:field="*{cityID}">
 
-          <option th:each="city : ${cityList}" th:value="${city.cityID}"
-                  th:text="${city.getCityName()+' '+city.getRegion()+' '+city.getCityID()}">
+          <option selected th:each="city : ${cityList}" th:value="${city.cityID}"
+                  th:text="${city.getCityName()+' '+city.getRegion()}">
           </option>
 
 
@@ -44,7 +46,7 @@
 
     <tr>
       <td></td>
-      <td><input type="submit" value="Choose"></td>
+      <td><input class="button" type="submit" value="Choose"></td>
     </tr>
 
   </form>

@@ -21,7 +21,7 @@ public class GlobalExceptionHandler {
     }
 
     @ResponseStatus(HttpStatus.BAD_GATEWAY)
-    @ExceptionHandler(NumberFormatException.class)
+    @ExceptionHandler(NullAnswerJsonException.class)
     public ModelAndView apiError(Exception ex){
         ModelAndView model = new ModelAndView("error");
         model.addObject("errorCode","502 Bad Gateway");

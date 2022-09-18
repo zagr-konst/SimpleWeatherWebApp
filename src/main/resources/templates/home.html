@@ -2,18 +2,27 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/style/home_style.css}"/>
     <title>Home</title>
+
+
 </head>
 <body>
 
-<div style="background-color: #e7e4e4; width: 100%" >
+
+
+<header>
     Hello, <a th:text="${name}"/>
     <br>
+    <div class="topnav">
     <a href="/users/selectCity">Change city</a>
-    <a style="float:right" href="/logout"><b>Logout</b></a>
-</div>
+    <a id="logout" href="/logout">Logout</a>
+    </div>
+</header>
 
-<table th:object="${city}"  align="center" border="1">
+
+
+<table th:object="${city}"  align="center" class="weatherTable">
     <thead>
     <tr align="center">
         <td colspan="3">

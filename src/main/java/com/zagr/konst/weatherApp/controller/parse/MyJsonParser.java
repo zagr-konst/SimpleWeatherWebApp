@@ -3,6 +3,7 @@ package com.zagr.konst.weatherApp.controller.parse;
 
 
 
+import com.zagr.konst.weatherApp.exception.NullAnswerJsonException;
 import com.zagr.konst.weatherApp.model.City;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -57,6 +58,7 @@ public class MyJsonParser {
             weather_value.put("WeatherIcon", weatherIcon);
         }catch(Exception e) {
             logger.error("Accuweather return null");
+            throw new NullAnswerJsonException("Accuweather return null");
         }
         logger.info("Parsed: "+weather_value);
         return weather_value;
@@ -101,6 +103,7 @@ public class MyJsonParser {
             }
         }catch (Exception e) {
             logger.error("Accuweather return null");
+            throw new NullAnswerJsonException("Accuweather return null");
         }
 
 
@@ -133,6 +136,7 @@ public class MyJsonParser {
 
         }catch (Exception e) {
             logger.error("Accuweather return null");
+            throw new NullAnswerJsonException("Accuweather return null");
         }
         logger.info("Parsed: "+city);
         return city;

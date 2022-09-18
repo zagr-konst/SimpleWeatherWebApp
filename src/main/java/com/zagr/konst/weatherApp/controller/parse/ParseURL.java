@@ -10,6 +10,7 @@ import java.net.URL;
 
 public class ParseURL {
     ///////
+    //Set up your token here
     final static String API_KEY=ApiKey.API_KEY;
     ///////
 

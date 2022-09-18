@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap');
+
+body{
+    background-color: #1e75fd;
+}
+
+header {
+    font-size: 25px;
+    color: white;
+    background-color: #1e75fd;
+}
+
+header a{
+    color: white;
+}
+
+.topnav{
+    font-weight: bold;
+}
+
+.topnav #logout {
+    float: right;
+}
+
+.topnav a{
+    text-decoration: none;
+    color: #abd1ff;
+}
+
+*{
+    /*        background-color: #1363DF;*/
+    font-family: "Roboto Mono";
+}
+.weatherTable a,td{
+    font-size: 20px;
+    color: #93d4ff;
+}
+
+.weatherTable{
+    alignment: center;
+    background-color: rgba(9, 100, 243, 0.91);
+    border-collapse: collapse;
+    border: 2px #7cafff solid;
+}
+tr{
+    border: 1px #7cafff solid;
+}

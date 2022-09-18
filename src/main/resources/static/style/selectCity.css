@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap');
+body{
+    background-color: #1e75fd;
+    font-family: "Roboto Mono";
+    font-size: 20px;
+    color: white;
+}
+
+.button {
+    background-color: #abd1ff; /* Green */
+    border: none;
+    border-radius: 10px;
+    color: #1e75fd;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+input[type=text] {
+    border: 2px solid rgba(7, 80, 201, 0.97);
+    border-radius: 4px;
+}
+
+:root {
+    --radius: 2px;
+    --baseFg: dimgray;
+    --baseBg: white;
+    --accentFg: #006fc2;
+    --accentBg: #bae1ff;
+}
+
+select {
+    -webkit-appearance: none;
+    appearance: none;
+    color: var(--baseFg);
+    border: 1px solid var(--baseFg);
+    line-height: 1;
+    outline: 0;
+    padding: 0.65em 2.5em 0.55em 0.75em;
+    border-radius: var(--radius);
+    background-color: var(--baseBg);
+    background-image: linear-gradient(var(--baseFg), var(--baseFg)),
+    linear-gradient(-135deg, transparent 50%, var(--accentBg) 50%),
+    linear-gradient(-225deg, transparent 50%, var(--accentBg) 50%),
+    linear-gradient(var(--accentBg) 42%, var(--accentFg) 42%);
+    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+    background-size: 1px 100%, 20px 22px, 20px 22px, 20px 100%;
+    background-position: right 20px center, right bottom, right bottom, right bottom;
+}
